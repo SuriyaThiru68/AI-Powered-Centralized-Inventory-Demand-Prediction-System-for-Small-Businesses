@@ -1,0 +1,51 @@
+services:
+  - type: web
+    name: orbitx-backend
+    env: node
+    plan: free
+    root: apps/backend
+    buildCommand: npm ci
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: EMAIL_FROM
+        sync: false
+      - key: EMAIL_PASS
+        sync: false
+      - key: EMAIL_HOST
+        sync: false
+      - key: EMAIL_PORT
+        sync: false
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_WHATSAPP_FROM
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+
+  - type: static
+    name: commerceos-frontend
+    plan: free
+    root: apps/frontend
+    buildCommand: npm ci && npm run build
+    publish: dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        sync: false
+      - key: NODE_ENV
+        sync: false
